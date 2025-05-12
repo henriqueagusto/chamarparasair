@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite para Sair</title>
+    <link rel="stylesheet" href="./estilo do convite.css">
+</head>
+<body>
+    
+    <div class="container">
+        
+        <h1>Convite para Sair</h1>
+        <p>Olá </p>
+        <p> Wanessa ! Chegou a hora... 🌟
+            Eu poderia te mandar uma mensagem ou até te chamar pessoalmente, mas decidi fazer algo diferente (e um pouquinho mais criativo).</p>
+        
+        <form id="invitationForm" action="https://formspree.io/f/xrgnjadq" method="POST">
+
+            <p>Escolha um horário</p>
+            <div class="time-options">
+                <label for="timeInput">Horário:</label>
+                <input type="time" id="timeInput" name="time" required><br>
+            </div>
+
+            <p>Escolha uma data</p>
+            <div class="date-options">
+                <label for="dateInput">Data:</label>
+                <input type="date" id="dateInput" name="date" required><br>
+            </div>
+
+            <p>Escolha uma atividade</p>
+            <div class="form-container">
+                <label for="activityInput">Atividade:</label>
+                <input type="radio" name="activity" value="Sair comigo">Sair comigo<br>
+                <input type="radio" name="activity" value="Esci con me">Esci con me<br>
+                <input type="radio" name="activity" value="Go out with me">Go out with me<br>
+            </div>
+            <div class="form-container">
+                <label for="nameInput">Digite seu nome para confirmar presença:</label>
+                <input type="text" id="nameInput" name="name" required>
+                <button type="submit" class="btn">Confirmar presença</button>
+            </div>
+            <div id="confirmationMessage" style="display: none;"></div>
+        </form>
+        <div class="countdown" id="countdown"></div>
+    </div>
+
+    <script>
+        document.getElementById("invitationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("nameInput").value;
+            const activity = document.querySelector('input[name="activity"]:checked');
+            const date = document.getElementById("dateInput").value;
+            const time = document.getElementById("timeInput").value;
+            const confirmationMessage = document.getElementById("confirmationMessage");
+            if (!activity) {
+                alert("Por favor, selecione uma atividade!");
+                return;
+            }
+            const formData = new FormData();
+            formData.append("name", name);
+            formData.append("activity", activity.value);
+            formData.append("date", date);
+            formData.append("time", time);
+
+            fetch("https://formspree.io/f/xrgnjadq", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "Accept": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                confirmationMessage.style.display = "block";
+                confirmationMessage.innerHTML = `<p>Obrigado, ${name}, por confirmar sua presença!</p>
+                                                 <p>Você escolheu a atividade: ${activity.value}</p>
+                                                 <p>Data: ${date}</p>
+                                                 <p>Horário: ${time}</p>
+                                                 <p>Estou ansioso para o nosso encontro!</p>`;
+            })
+            .catch(error => {
+                console.error("Erro ao enviar o formulário:", error);
+                alert("Ocorreu um erro ao enviar o formulário. Por favor, tente novamente mais tarde.");
+            });
+        });
+
+        // Contador de tempo para o evento
+        const eventDate = new Date("[Data do evento]"); // Defina a data do evento aqui
+        const now = new Date();
+        const countdownElement = document.getElementById("countdown");
+
+        function updateCountdown() {
+            const timeDifference = eventDate - now;
+            if (timeDifference > 0) {
+                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `Faltam ${days}d ${hours}h ${minutes}m ${seconds}s para o evento.`;
+            } else {
+                countdownElement.innerHTML = "O evento começou!";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>

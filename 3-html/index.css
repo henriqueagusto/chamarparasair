@@ -1,0 +1,252 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Mukta', sans-serif;
+}
+
+/* Fonte principal */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script:wght@400;700&display=swap');
+
+/* Corpo e fundo */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(45deg, #ff6a00, #ee0979);
+  background-size: 400% 400%;
+  animation: gradientBackground 15s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Animação de fundo */
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Container principal */
+.container {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+/* Animação de aparecimento */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Imagem da rosa */
+.rose-image {
+  width: 200px;
+  margin-top: 20px;
+  animation: rotateIn 1s ease-in-out;
+}
+
+/* Efeito de rotação da imagem */
+@keyframes rotateIn {
+  from {
+    transform: rotate(-360deg) scale(0);
+  }
+  to {
+    transform: rotate(0) scale(1);
+  }
+}
+
+/* Título do convite (Neon) */
+.neon-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 32px;
+  color: #fff;
+  text-shadow: 0 0 5px #ff6a00, 0 0 10px #ff6a00, 0 0 20px #ee0979;
+  animation: pulse 2s infinite alternate;
+}
+
+/* Animação do título (efeito de pulsação) */
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+/* Parágrafos de convite com animação */
+.animated-text {
+  color: #fff;
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+  animation-delay: 0.5s;
+}
+
+p:nth-child(3) {
+  animation-delay: 1s;
+}
+p:nth-child(4) {
+  animation-delay: 1.5s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Estilo base para o botão */
+button {
+  --button_radius: 1em;
+  --button_color: #ffffff;
+  --button_outline_color: #ff80bf;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--button_radius);
+  background: linear-gradient(45deg, #ff80bf, #ff66b2);
+  color: #fff;
+  padding: 12px 30px; /* Ajuste no padding para um botão maior */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  width: 100%; /* Botão ocupa 100% da largura disponível */
+  max-width: 300px; /* Tamanho máximo para o botão */
+}
+
+/* Adicionando borda de brilho ao botão */
+button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+/* Efeito de brilho no hover */
+button:hover {
+  background: linear-gradient(45deg, #ff66b2, #ff80bf);
+  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.5);
+}
+
+button:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Efeito ao pressionar o botão */
+button:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+}
+
+/* Estilo para o botão "Quero não, gatinho" */
+.botao-nao {
+  background: linear-gradient(45deg, #ff5c8d, #ff2b61);
+  border: 2px solid #ff2b61;
+}
+
+.botao-nao:hover {
+  background: linear-gradient(45deg, #ff2b61, #ff5c8d);
+}
+
+.botao-nao:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 10px rgba(255, 30, 100, 0.3);
+}
+
+/* Estilo para o botão "Claro que querooo!" */
+.botao-sim {
+  background: linear-gradient(45deg, #ffb3d9, #ff66b2);
+  border: 2px solid #ff66b2;
+}
+
+.botao-sim:hover {
+  background: linear-gradient(45deg, #ff66b2, #ffb3d9);
+}
+
+.botao-sim:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+}
+
+/* Para os textos dentro dos botões */
+.button_top {
+  display: block;
+  position: relative;
+  z-index: 1;
+  font-size: 18px;
+  text-align: center;
+  color: #fff;
+  padding: 5px 15px;
+}
+
+/* Container de botões, alinhando-os lado a lado (esquerda e direita) */
+.botoes {
+  display: flex;
+  justify-content: space-between;  /* Distribui os botões entre os lados esquerdo e direito */
+  gap: 20px;  /* Espaçamento entre os botões */
+  margin-top: 20px; /* Espaço acima dos botões */
+  width: 100%; /* A largura dos botões ocupa 100% da largura disponível */
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  /* Ajustando os botões para não ocuparem toda a largura da tela */
+  button {
+    font-size: 16px;
+    padding: 10px 25px; /* Ajuste de padding para telas médias */
+    max-width: 270px;
+  }
+
+  /* Alterando a direção dos botões para ficarem lado a lado */
+  .botoes {
+    flex-direction: row; /* Botões lado a lado */
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ajuste do botão para telas menores */
+  button {
+    font-size: 14px;
+    padding: 10px 20px;
+    max-width: 90%; /* Botões com 90% da largura */
+  }
+
+  /* Alinhando os botões em coluna no celular */
+  .botoes {
+    flex-direction: column; /* Coloca os botões em coluna */
+    gap: 15px; /* Aumenta o espaçamento entre os botões */
+  }
+}
