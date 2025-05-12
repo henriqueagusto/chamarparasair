@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- 
+Tutorial: https://www.youtube.com/watch?v=zxxB9SFh9p4
+-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style do pedido.css">
+    <title>aceita sair comigo?</title>
+</head>
+<body>
+    <div id="background">
+        <video loop autoplay muted>
+            <source src="./assets/153977-806571978_medium.mp4" type="video/mp4">
+        </video>
+    </div>
+<!--Parte do Botão-->
+    <div id="conteudo">
+        <h2>Você tem certeza absoluta???</h2>
+        
+        <div style="margin: auto;width: 170px;">
+            <button class="pushable" style="position: fixed;display: block;" class="btn" onclick="sim()">
+                <span class="shadow"></span>
+                <span class="edge"></span>
+                <span class="front">
+                  SIM
+                </span>
+            </button>
+            
+            
+                <button class="pushable"class="btn" onclick="desvia(this)" onmouseover="desvia(this)" style="position: absolute;">
+                    <span class="shadow"></span>
+                    <span class="edge"></span>
+                    <span class="front">
+                      NÃO
+                    </span>
+                  </button>
+              
+        </div>
+    </div>
+<!--Parte do Java script -->
+    <script>
+        function sim() {
+    alert("Você aceitou namorar comigo! :)");
+    // redireciona para um URL após clicar no SIM
+    location.href = "convite.html";
+}
+
+function desvia(btn) {
+    // btn declarado na função
+    btn.style.position = 'absolute';
+    btn.style.bottom = geraPosicao(10, 90);
+    btn.style.left = geraPosicao(10, 90);
+    console.log('opa, desviei...');
+}
+
+function geraPosicao(min, max) {
+    return (Math.random() * (max - min) + min) + "%";
+}
+    </script>
+</body>
+</html>
